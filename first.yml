@@ -1,0 +1,21 @@
+                               --- 
+- name: "create directory"
+  connection: local
+  hosts: localhost
+  tasks: 
+    - name: "directory"
+      file: 
+        name: samba
+        state: directory
+    - name: "create file"
+      file: 
+        name: samba/rao
+        state: touch
+    - name: "copy content"
+      copy:
+        content: "hello welcome to ansible"
+        dest: samba/rao
+    - name: "copy file"
+      copy:
+        src: /home/sambasiva/Downloads/buid.txt
+        dest: samba
