@@ -1,0 +1,44 @@
+Copy:
+    --->To copy the entair folder structure
+    >>ansible all -m copy -a 'src=dir1 dest=/tem'
+    --->Copy module used for changing ownership and group ownership and permision of a files
+    >>ansible all -m copy -a 'src=file1 dest=temp owner=root group=root mode=765' -b (-b stands for higher preority on the managed nodes)
+    >>ansible all -m copy -a 'content="hello how are you" dest=/temp/file' -b
+    
+FileModule:
+    --->this is used for creating files and directories in managed nodes
+    >> ansible all -m file -a 'name=/tmp/samba state=directory'
+    
+    state=touch is for creating files
+    state=directory is for creating dirctories
+    state=absent is deleting files and directories
+    
+    ---> ansible command create directres on all the managed nodes and change group ownership and permissions
+    >> ansible all -m file -a 'name=/home/ubuntu/dir1 state=directory owner=root group=ubuntu mode=777' -b
+    
+AptModule:
+     --->this is used for package management and managed nodes
+     >>ansible all -m apt -a 'name=git state=present' -b
+     
+     state=present is for instalation
+     state=absent is for uninstalation
+     state=latest is for upgarade latest version
+     
+     >>ansible all -m apt -a 'name=apach2 state=present update-catch=yes' -b
+     --->now install apach2 in all managed nodes
+     
+     ---> purge=yes can be given for removing the all the configuration files. once appliction deleted
+     >>ansible all -m apt -a 'name=tomat8 state=absent purge=yes' -b (tomact8 is uninstall and also remove configuration files)
+     
+ServiceModule:
+      --->this is used for starting,stoping and restarting services
+      >>ansible all -m service -a 'name=tomacat8 state=stoped' -b
+      
+      state=stoped for stoping the service
+      state=started for starting the service
+      state=restarted for restarting the service
+      
+GitModule:
+      --->this is use to perform git version controling on the managed nodes
+      --->ansible command to clone remote git repository into all the managed nodes
+      >>ansible all -m git -a 'repo=https://github.com/sambadevops9/Ansible.git  dest=/home/ubuntu/samba'
