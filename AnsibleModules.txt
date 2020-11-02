@@ -42,3 +42,18 @@ GitModule:
       --->this is use to perform git version controling on the managed nodes
       --->ansible command to clone remote git repository into all the managed nodes
       >>ansible all -m git -a 'repo=https://github.com/sambadevops9/Ansible.git  dest=/home/ubuntu/samba'
+      
+ReplaceModule:
+      --->this is used for identifi some test in file. And replace some other text
+      --->ansible command to change the port number of tomcat from 8080 to 9090
+      >>ansible all -m replace -a 'path=/etc/tomcat8/server.xml regexp=8080 replace=9090' -b
+      
+UserModle:
+      --->this is used for creating managed nodes.
+      >>ansible all -m user -a 'name=samba password=Samba@345' -b
+      --->ansible command create user and assign password all users
+      >>ansible all -m user -a 'name=samba password=samba@345 uid=1234 comment="normal user" home=/home/ubuntu/samba shell=/bin/bash' -b
+      
+UriModule:
+      --->This is used to check remote uri reachable are not. ansible command check google.com reachable from all managed nodes
+      >>ansible all -m uri -a 'uri=http://oogle.com status=200'
